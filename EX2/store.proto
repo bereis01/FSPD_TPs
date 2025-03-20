@@ -1,0 +1,53 @@
+// DCC641 - Fundamentos de Sistemas Paralelos e Distribuídos
+// Segundo Exercício de Programação
+// Nome: Bernardo Reis de Almeida
+// Matrícula: 2021032234
+
+syntax = "proto3";
+
+package store;
+
+// The store service definition.
+service Store 
+{
+    // Gets the price of the product.
+    rpc GetPrice (PriceRequest) returns (PriceResponse) {}
+
+    // Processess the selling of a product by identifying an order and executing its transfer.
+    rpc ProcessSell (SellRequest) returns (SellResponse) {}
+
+    // Finalizes the server execution.
+    rpc Finalize (FinalizeRequest) returns (FinalizeResponse) {}
+}
+
+// An empty message.
+message PriceRequest {}
+
+// A message with the price of the product.
+message PriceResponse
+{
+    int32 value = 1;
+}
+
+// A message with the order ID to be transfered to the seller.
+message SellRequest
+{
+    int32 order_id = 1;
+}
+
+// A message with the status of a sell operation.
+message SellResponse
+{
+    int32 value = 1;
+}
+
+// An empty message.
+message FinalizeRequest {}
+
+// A message with the status of the bank termination and with the store's termination status.
+// The store's termination status is the seller's balance.
+message FinalizeResponse
+{
+    int32 bank_value = 1;
+    int32 value = 2;
+}
